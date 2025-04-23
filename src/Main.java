@@ -18,6 +18,8 @@ public class Main {
                 3. Ver personas registradas
                 4. Ver perros disponibles
                 5. Adoptar perro
+                6. Consultar el perro mas viejo
+                7.Salir
                  Elige una opción:""");
         opcion = teclado.nextInt();
 
@@ -75,39 +77,64 @@ public class Main {
                     }
                 }
                 case 5 -> {
-                    System.out.print("Documento de la persona: ");
+                    teclado.nextLine();
+                    System.out.println("Ingrese documento persona");
                     String documento = teclado.nextLine();
-                    Persona persona = lstpersonas(documento);
+                    Persona personaEncontrada = null;
 
-                    if (persona == null) {
+                    for (Persona person : lstpersonas) {
+                        if (person.getDocumento().equalsIgnoreCase(documento)) {
+                            personaEncontrada = person;
+                            break;
+                        }
+                    }
+                    if (personaEncontrada == null) {
                         System.out.println("Persona no encontrada.");
                         break;
                     }
 
-                    System.out.print("Placa del perro a adoptar: ");
+                    System.out.print("Ingrese la placa del perro a adoptar: ");
                     String placa = teclado.nextLine();
-                    Perro perro = placa(placa);
+                    Perro perroEncontrado = null;
 
-                    if (perro == null) {
-                        System.out.println("Perro no encontrado o ya adoptado.");
-                        break;
+                    for (Perro perr : lstperrosDisponibles) {
+                        if (perr.getPlaca().equalsIgnoreCase(placa)) {
+                            perroEncontrado = perr;
+                            break;
+                        }
                     }
 
-                    if (persona.adoptarPerro(perro)) {
-                        lstperrosDisponibles.remove(perro);
-                        System.out.println("Adopción realizada con éxito.");
+                    if (perroEncontrado == null) {
+                        System.out.println("Perro no encontrado.");
                     } else {
-                        System.out.println("La persona ya adoptó 3 perros.");
+                        lstperrosDisponibles.remove(perroEncontrado);
+                        System.out.println(personaEncontrada.getNombre() + " ha adoptado a " + perroEncontrado.getNombre());
                     }
                 }
+                case 6 -> {
+                    if (lstperrosDisponibles.isEmpty()) {
+                        System.out.println("No hay perros disponibles.");
+                    } else {
+                        Perro perroMasViejo = lstperrosDisponibles.get(0);
 
+                        for (Perro p : lstperrosDisponibles) {
+                            if (p.getEdad() > perroMasViejo.getEdad()) {
+                                perroMasViejo = p;
+                            }
+                        }
 
-
-
+                        System.out.println("El perro más viejo es:");
+                        System.out.println(perroMasViejo);
+                    }
+                }
+                case 7 -> System.out.println("Hasta pronto");
 
             }
-        }while (opcion != 5) ;
+
+        }while (opcion != 7) ;
+
     }
-
-
 }
+
+
+

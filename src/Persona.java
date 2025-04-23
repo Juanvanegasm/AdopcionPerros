@@ -13,33 +13,54 @@ public class Persona {
         this.edad = edad;
         this.documento = documento;
     }
-    public boolean adoptarPerro(Perro perro) {
-        if (lstPerrosadoptados.size() < 3) {
-            lstPerrosadoptados.add(perro);
-            return true;
-        }
-        return false;
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public Perro perroMasGrande() {
-        if (lstPerrosadoptados.isEmpty()) return null;
-        Perro mayor = lstPerrosadoptados.get(0);
-        for (Perro p : lstPerrosadoptados) {
-            if (p.getEdad() > mayor.getEdad()) {
-                mayor = p;
-            }
-        }
-        return mayor;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public List<Perro> getLstPerrosadoptados() {
+        return lstPerrosadoptados;
+    }
+
+    public void setLstPerrosadoptados(List<Perro> lstPerrosadoptados) {
+        this.lstPerrosadoptados = lstPerrosadoptados;
     }
 
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", edad=" + edad +
-                ", documento='" + documento + '\'' +
-                '}';
+        return "Persona " +
+                " Nombre: " + nombre + " /" +
+                " Apellido: " + apellido + " /" +
+                " Edad: " + edad + " /" +
+                " Documento: " + documento + " /" ;
     }
 }
